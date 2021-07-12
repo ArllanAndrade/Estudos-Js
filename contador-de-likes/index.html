@@ -1,0 +1,84 @@
+<main class="tela">
+
+    <!-- Vamos renderizar o html abaixo com Javascript -->
+    <!-- <button class="botaoDeLike">
+        <span class="owner">Qualquer</span>
+        <span class="contador">0 likes</span>
+    </button>
+    <br><br>
+    <button class="botaoDeLike">
+        <span class="owner">Alura</span>
+        <span class="contador">0 likes</span>
+    </button>
+    <br><br>        
+    <button class="botaoDeLike">
+        <span class="owner">FrontInSampa</span>
+        <span class="contador">0 likes</span>
+    </button>
+    <br><br> -->
+</main>
+
+<script>
+    //Refs:
+    // https://www.youtube.com/watch?v=QzDjdlF1BQI
+
+
+    //=========================================================
+    // [Dados]
+    const canais = [
+        {
+            name: 'Canal Qualquer',
+            likes: 0,
+        },
+        {
+            name: 'Alura',
+            likes: 0,
+        },
+        {
+            name: 'FrontInSampa',
+            likes: 0,
+        },
+        {
+            name: 'Outro Canal',
+            likes: 0,
+        },            
+    ];
+
+    
+    //=========================================================
+
+    function addLike(canaisName){
+        canais.forEach((canalAtual) => {
+            if(canaisName === canalAtual.name) {
+                console.log('Atualizando o canal:', canaisName);
+                canalAtual.likes = canalAtual.likes + 1;
+            }
+        });
+        render();
+    }
+
+
+    //=========================================================
+    // [Lógica de rederização]
+
+    const buttonTemplate = function(canais) {
+        return `
+            <button class="botaoDeLike" onclick="addLike('${canais.name}')">
+                <span class="owner">${canais.name}</span>
+                <span class="contador">${canais.likes}</span>
+            </button>
+            <br><br>
+        `
+    }
+
+    function render(){
+        console.log(canais);
+
+        const $tela = document.querySelector('.tela');
+        $tela.innerHTML = canais.map((canais) => {
+            return buttonTemplate(canais);
+        }).join('');
+    }
+    render();
+
+</script>
